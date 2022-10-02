@@ -4,9 +4,13 @@ services:
     build:
       context: ./
       dockerfile: ./docker/Dockerfile
+      args:
+        # Dockerfileに環境変数を渡す
+        - UID=${UID}
+        - GID=${GID}
+        - USERNAME=${USERNAME}
     volumes:
-      - ~/.aws-gushi:/home/user/.aws
+      - ~/.aws-gushi:/home/luna/.aws
+      - ~/.ssh:/home/luna/.ssh
       - ./:/src
-      - ~/.ssh:/home/user/.ssh
     working_dir: /src/
-    user: "1000:1000"
