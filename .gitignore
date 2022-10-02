@@ -2,3 +2,4 @@
 
 hidden.env
 .terraform
+iac/env/dev/*.zip

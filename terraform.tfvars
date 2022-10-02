@@ -3,7 +3,7 @@ app = "my-app"
 environment = "dev"
 
 internal = true
-container_port = "8080"
+container_port = "80"
 replicas = "1"
 health_check = "/health"
 region = "us-east-1"
