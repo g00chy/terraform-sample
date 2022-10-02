@@ -1,0 +1,12 @@
+version: "3"
+services:
+  cli:
+    build:
+      context: ./
+      dockerfile: ./docker/Dockerfile
+    volumes:
+      - ~/.aws-gushi:/home/user/.aws
+      - ./:/src
+      - ~/.ssh:/home/user/.ssh
+    working_dir: /src/
+    user: "1000:1000"
