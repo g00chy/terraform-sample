@@ -5,9 +5,16 @@ kill-rm:
 	docker compose rm 
 shell:
 	docker compose run --entrypoint='' --rm cli bash
-init:
-	docker compose run --rm cli terraform init 
-plan:
-	docker compose run --rm cli terraform init 
-apply:
-	docker compose run --rm cli terraform init 
+
+base-init:
+	docker compose run --rm -w /src/iac/base cli terraform init 
+base-plan:
+	docker compose run --rm -w /src/iac/base cli terraform plan 
+base-apply:
+	docker compose run --rm -w /src/iac/base cli terraform apply 
+dev-init:
+	docker compose run --rm -w /src/iac/env/dev cli terraform init 
+dev-plan:
+	docker compose run --rm -w /src/iac/env/dev cli terraform plan 
+dev-apply:
+	docker compose run --rm -w /src/iac/env/dev cli terraform apply 

@@ -18,3 +18,4 @@ RUN groupadd -g ${GID} ${USERNAME} \
 
 # コンテナを操作するユーザーをルートから一般ユーザーに変更
 USER ${UID}
+ENTRYPOINT [ "" ]
