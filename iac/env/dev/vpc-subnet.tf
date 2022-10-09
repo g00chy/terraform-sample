@@ -24,7 +24,7 @@ resource "aws_subnet" "public" {
   cidr_block        = element(var.cidr_public, count.index)
   availability_zone = data.aws_availability_zones.available.names[count.index]
   tags = {
-    Name = "${var.app}-${var.environment}-public-${count.index + 1}"
+    Name            = "${var.app}-${var.environment}-public-${count.index + 1}"
   }
 }
 

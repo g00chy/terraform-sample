@@ -53,7 +53,7 @@ resource "aws_ecs_cluster" "app" {
 # note that the source for the turner default backend image is here:
 # https://github.com/turnerlabs/turner-defaultbackend
 variable "default_backend_image" {
-  default = "019412732488.dkr.ecr.us-east-1.amazonaws.com/g00chy-sample-ecs:latest"
+  default = "019412732488.dkr.ecr.us-east-1.amazonaws.com/g00chy:latest"
 }
 
 resource "aws_appautoscaling_target" "app_scale_target" {
@@ -126,6 +126,7 @@ DEFINITION
   tags = var.tags
 }
 
+
 resource "aws_ecs_service" "app" {
   name            = "${var.app}-${var.environment}"
   cluster         = aws_ecs_cluster.app.id
@@ -186,8 +187,6 @@ variable "logs_retention_in_days" {
   description = "Specifies the number of days you want to retain log events"
 }
 
-resource "aws_cloudwatch_log_group" "logs" {
-  name              = "/fargate/service/${var.app}-${var.environment}"
-  retention_in_days = var.logs_retention_in_days
-  tags              = var.tags
+resource "aws_cloudwatch_log_group" "fargate-log" {
+  name = "/fargate/service/${var.app}-${var.environment}"
 }

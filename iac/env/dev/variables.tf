@@ -25,6 +25,7 @@ variable "environment" {
 # Best practice is that this value is higher than 1024 so the container processes
 # isn't running at root.
 variable "container_port" {
+  default ="80"
 }
 
 # The port the load balancer will listen on

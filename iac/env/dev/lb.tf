@@ -47,7 +47,7 @@ resource "aws_alb" "main" {
   #   ",",
   #   var.internal == true ? var.private_subnets : var.public_subnets,
   # )
-  subnets = aws_subnet.private.*.id
+  subnets = aws_subnet.public.*.id
   security_groups = [aws_security_group.nsg_lb.id]
   tags            = var.tags
 

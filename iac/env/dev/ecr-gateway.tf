@@ -7,7 +7,7 @@ output "count" {
   value = aws_route_table.private.id
 }
 resource "aws_vpc_endpoint_route_table_association" "private_s3" {
-  count           = length(aws_subnet.private)
+  count = length(aws_subnet.private)
   vpc_endpoint_id = aws_vpc_endpoint.s3.id
   route_table_id  = aws_route_table.private.id
 }
@@ -66,20 +66,3 @@ resource "aws_vpc_endpoint" "ssm" {
   security_group_ids  = [aws_security_group.vpc_endpoint.id]
   private_dns_enabled = true
 }
-
-resource "aws_route_table" "app_private" {
-  count  = length(aws_subnet.private)
-  vpc_id = aws_vpc.vpc.id
-}
-
-resource "aws_route_table_association" "app_private" {
-  count          = length(aws_subnet.private)
-  subnet_id      = aws_subnet.private[count.index].id
-  route_table_id = aws_route_table.private.id
-}
-
-# resource "aws_route" "purlic_rt_igw" {
-#   route_table_id = aws_route.public.id
-#   gateway_id = aws_internet_gateway.igw.id
-#   destination_cidr_block = "0.0.0.0/0"
-# }

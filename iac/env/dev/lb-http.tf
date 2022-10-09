@@ -6,9 +6,18 @@ resource "aws_alb_listener" "http" {
   port              = var.lb_port
   protocol          = var.lb_protocol
 
+  # default_action {
+  #   target_group_arn = aws_alb_target_group.main.id
+  #   type             = "forward"
+  # }
   default_action {
-    target_group_arn = aws_alb_target_group.main.id
-    type             = "forward"
+    type             = "fixed-response"
+
+    fixed_response {
+      content_type = "text/plain"
+      status_code  = "200"
+      message_body = "ok"
+    }
   }
 }
 
