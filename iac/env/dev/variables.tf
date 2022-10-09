@@ -41,12 +41,38 @@ variable "lb_protocol" {
 
 # The VPC to use for the Fargate cluster
 variable "vpc" {
+  default = "vpc"
 }
 
 # The private subnets, minimum of 2, that are a part of the VPC(s)
 variable "private_subnets" {
+  default = "g00chy-dev-private-1,g00chy-dev-private-2"
 }
 
 # The public subnets, minimum of 2, that are a part of the VPC(s)
 variable "public_subnets" {
+  default = "g00chy-dev-public-1,g00chy-dev-public-2"
+}
+
+variable "cidr_vpc" {
+  default = "10.255.0.0/16"
+}
+
+variable "cidr_public" {
+  default = [
+    "10.255.1.0/24",
+    "10.255.2.0/24"
+  ]
+}
+variable "cidr_private" {
+  default = [
+    "10.255.10.0/24",
+    "10.255.11.0/24"
+  ]
+}
+variable "cidr_secure" {
+  default = [
+    "10.255.21.0/24",
+    "10.255.22.0/24"
+  ]
 }

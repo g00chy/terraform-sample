@@ -6,7 +6,7 @@
 # Whether the application is available on the public internet,
 # also will determine which subnets will be used (public or private)
 variable "internal" {
-  default = true
+  default = false
 }
 
 # The amount time for Elastic Load Balancing to wait before changing the state of a deregistering target from draining to unused
@@ -42,12 +42,15 @@ resource "aws_alb" "main" {
 
   # launch lbs in public or private subnets based on "internal" variable
   internal = var.internal
-  subnets = split(
-    ",",
-    var.internal == true ? var.private_subnets : var.public_subnets,
-  )
+
+  # subnets = split(
+  #   ",",
+  #   var.internal == true ? var.private_subnets : var.public_subnets,
+  # )
+  subnets = aws_subnet.private.*.id
   security_groups = [aws_security_group.nsg_lb.id]
   tags            = var.tags
+
 
   # enable access logs in order to get support from aws
   access_logs {
@@ -56,11 +59,22 @@ resource "aws_alb" "main" {
   }
 }
 
+# output "hoge" {
+#   # for_each = aws_subnet.private.*
+#   value = aws_subnet.private.*.id
+#     # for subnet in aws_subnet.private.* : subnet.id => {
+#     #   cidr_block = subnet.cidr_block
+#     #   id = subnet.id
+#     #   arn = subnet.arn
+#     # }
+#   # }
+# }
+
 resource "aws_alb_target_group" "main" {
   name                 = "${var.app}-${var.environment}"
   port                 = var.lb_port
   protocol             = var.lb_protocol
-  vpc_id               = var.vpc
+  vpc_id               = aws_vpc.vpc.id
   target_type          = "ip"
   deregistration_delay = var.deregistration_delay
 

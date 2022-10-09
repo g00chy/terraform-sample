@@ -11,7 +11,7 @@ terraform {
   backend "s3" {
     region  = "us-east-1"
     profile = "default"
-    bucket  = "tf-state-g00chy-sample-ecs"
+    bucket  = "tf-state-g00chy"
     key     = "dev.terraform.tfstate"
   }
 }

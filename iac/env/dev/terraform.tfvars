@@ -1,5 +1,5 @@
 # app/env to scaffold
-app = "g00chy-sample-ecs"
+app = "g00chy"
 environment = "dev"
 
 internal = true
@@ -9,9 +9,9 @@ health_check = "/"
 region = "us-east-1"
 aws_profile = "default"
 saml_role = "terraform_tfstate"
-vpc = "vpc-04300eaaff4b0e9c9"
-private_subnets = "subnet-0a03980a4e7740ad1,subnet-0f8742dddcf0ceb31"
-public_subnets =  "subnet-0ac7de5971b0085e9,subnet-0e1078f53afcd67f8"
+vpc = "vpc"
+private_subnets = "subnet-priv1,subnet-priv2"
+public_subnets =  "subnet-pub1,subnet-pub2"
 tags = {
   application   = "my-app"
   environment   = "dev"
