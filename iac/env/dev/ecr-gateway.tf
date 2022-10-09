@@ -77,3 +77,9 @@ resource "aws_route_table_association" "app_private" {
   subnet_id      = aws_subnet.private[count.index].id
   route_table_id = aws_route_table.private.id
 }
+
+# resource "aws_route" "purlic_rt_igw" {
+#   route_table_id = aws_route.public.id
+#   gateway_id = aws_internet_gateway.igw.id
+#   destination_cidr_block = "0.0.0.0/0"
+# }
