@@ -22,3 +22,11 @@ dev-apply:
 	docker compose run --rm -w /src/iac/env/dev cli terraform apply
 dev-destroy:
 	docker compose run --rm -w /src/iac/env/dev cli terraform destroy
+
+AID := `docker compose run --rm -w /src/iac/env/dev --entrypoint '' cli aws sts get-caller-identity --query Account --output text`
+ecr-login:
+	aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $(AID).dkr.ecr.us-east-1.amazonaws.com
+	docker build -t g00chy -f docker/ecsDocker .
+	docker tag g00chy:latest $(AID).dkr.ecr.us-east-1.amazonaws.com/g00chy:latest
+	docker push $(AID).dkr.ecr.us-east-1.amazonaws.com/g00chy:latest
+
