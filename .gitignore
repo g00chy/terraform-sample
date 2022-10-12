@@ -3,3 +3,5 @@
 hidden.env
 .terraform
 iac/env/dev/*.zip
+iac/base/terraform.tfstate
+iac/base/terraform.tfstate.backup
